@@ -123,5 +123,10 @@
       }
     }
   },
-  "defaultProject": "ambient-poney"
+  "defaultProject": "ambient-poney",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

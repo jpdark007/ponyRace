@@ -1,0 +1,16 @@
+:host{
+    display: block;
+    width: 100%;
+
+    .poney{
+        display: inline-block;
+        width: 10%;
+        position: relative;
+        left: 0;
+        transition: left .8s linear;
+    img{
+        display: inline-block;
+        width: 100%
+    }
+    }
+}
