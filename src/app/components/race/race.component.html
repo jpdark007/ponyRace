@@ -1,4 +1,5 @@
-<span *ngFor="let p of ponies | isRacing:poneyIds; let i = index">
+<!-- span *ngFor="let p of ponies | isRacing:poneyIds; let i = index"-->
+<span *ngFor="let p of ponies; let i = index">
   <app-poney
     [class.winner]="p.id === winningPoneyId"
     appRacing

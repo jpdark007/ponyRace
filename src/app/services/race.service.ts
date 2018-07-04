@@ -9,17 +9,17 @@ export class RaceService {
     {
       id: 0,
       name: 'Tokyo',
-      poneyIds: [0, 1]
+      poneyIds: [0, 2]
     },
     {
       id: 1,
       name: 'Paris',
-      poneyIds: [1, 2]
+      poneyIds: [2, 3]
     },
     {
       id: 2,
       name: 'Berk',
-      poneyIds: [2, 3]
+      poneyIds: [0, 3]
     }
   ]
 
@@ -51,12 +51,18 @@ export class RaceService {
     }
   ];
 
-  getPonies(){
+  getPonies(): Poney[]{
     return this.ponies;
   }
 
-  getRaces(){
+  getRaces(): Race[]{
     return this.races;
+  }
+
+  getRaceById(id: number): Race{
+    return this.getRaces().find(race => {
+      return race.id == id;
+    });
   }
 
   constructor() { }

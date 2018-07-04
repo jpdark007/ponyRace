@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IsRacingPipe } from '../../pipes/is-racing.pipe';
 import { RaceService } from '../../services/race.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-race',
@@ -12,7 +13,7 @@ export class RaceComponent implements OnInit {
   winningPoneyId: number;
   intervalId: any;
 
-  poneyIds: number[] = [0,3];
+  //poneyIds: number[] = [0,3];
 
   ponies: Poney[]
 
@@ -33,24 +34,31 @@ export class RaceComponent implements OnInit {
 
   constructor(
     private isRacingPipe: IsRacingPipe,
-    private raceService: RaceService
+    private raceService: RaceService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-
-    this.ponies = this.raceService.getPonies();
-
-    this.ponies = this.isRacingPipe.transform(this.ponies, this.poneyIds);
-
-    this.intervalId = setInterval(() => {
-      for(let i=0;i<this.ponies.length; i++){
-        this.ponies[i].distance += Math.floor(Math.random() * 5) + 1
-        if(this.ponies[i].distance >= 90){
-          clearInterval(this.intervalId);
-          break; 
-        }
-      }
-    },400)
+    //Get id from route
+    this.route.params.subscribe(params => this.startRace(params));
   }
 
+    startRace(params){
+      this.ponies = this.raceService.getPonies();
+
+      //get race
+      let race = this.raceService.getRaceById(params.id);
+
+      this.ponies = this.isRacingPipe.transform(this.ponies, race.poneyIds);
+  
+      this.intervalId = setInterval(() => {
+        for(let i=0;i<this.ponies.length; i++){
+          this.ponies[i].distance += Math.floor(Math.random() * 5) + 1
+          if(this.ponies[i].distance >= 90){
+            clearInterval(this.intervalId);
+            break; 
+          }
+        }
+      },400)
+    }
 }
