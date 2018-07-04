@@ -1,69 +1,45 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RaceService {
 
-  races: Race[] = [
-    {
-      id: 0,
-      name: 'Tokyo',
-      poneyIds: [0, 2]
-    },
-    {
-      id: 1,
-      name: 'Paris',
-      poneyIds: [2, 3]
-    },
-    {
-      id: 2,
-      name: 'Berk',
-      poneyIds: [0, 3]
-    }
-  ]
+  races: Race[]
 
-  ponies: Poney[] =
-  [
-    {
-      id: 0,
-      "name": "Eric",
-      "img" : "https://github.com/Aubret/poneymon/blob/master/src/assets/pony-blue-running.gif?raw=true",
-      "distance": 0
-    },
-    {
-      id: 1,
-      "name": "Tom",
-      "img": "https://github.com/Aubret/poneymon/blob/master/src/assets/pony-purple-running.gif?raw=true",
-      "distance": 0
-    },
-    {
-      id: 2,
-      "name": "Steeve",
-      "img": "https://github.com/Aubret/poneymon/blob/master/src/assets/pony-green-running.gif?raw=true",
-      "distance": 0
-    },
-    {
-      id: 3,
-      "name": "Robert",
-      "img": "https://github.com/Aubret/poneymon/blob/master/src/assets/pony-purple-running.gif?raw=true",
-      "distance": 0
-    }
-  ];
+  ponies: Poney[] = []
 
-  getPonies(): Poney[]{
-    return this.ponies;
+  getPonies(): Observable<Poney[]>{
+    //return this.ponies;
+    return this.http.get("http://localhost:3000/ponies").pipe(map((res) => {
+      return <Poney[]>res;
+    }));
   }
 
-  getRaces(): Race[]{
-    return this.races;
+  getRaces(): Observable<Race[]>{
+    return this.http.get("http://localhost:3000/races").pipe(map((res) => {
+      return <Race[]>res;
+    }));
+    //return this.races;
   }
 
-  getRaceById(id: number): Race{
-    return this.getRaces().find(race => {
-      return race.id == id;
-    });
+  getRaceById(id: number): Observable<Race>{
+    //return this.getRaces().find(race => {
+    // return race.id == id;
+    //});
+    return this.http.get("http://localhost:3000/races/"+id).pipe(map((res) => {
+      return <Race>res;
+    }));
   }
 
-  constructor() { }
+  reset(){
+    this.ponies.forEach(poney => {
+      poney.distance = 0;
+    })
+  }
+
+  constructor(private http: HttpClient) { }
 }

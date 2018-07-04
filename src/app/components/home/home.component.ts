@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RaceService } from '../../services/race.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,11 @@ import { RaceService } from '../../services/race.service';
 })
 export class HomeComponent implements OnInit {
 
-  races: Race[]
+  races$: Observable<Race[]>
   constructor(private raceService: RaceService) { }
 
   ngOnInit() {
-    this.races = this.raceService.getRaces();
+    this.races$ = this.raceService.getRaces();
   }
 
 }

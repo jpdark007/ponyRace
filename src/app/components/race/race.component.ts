@@ -44,21 +44,31 @@ export class RaceComponent implements OnInit {
   }
 
     startRace(params){
-      this.ponies = this.raceService.getPonies();
-
-      //get race
-      let race = this.raceService.getRaceById(params.id);
-
-      this.ponies = this.isRacingPipe.transform(this.ponies, race.poneyIds);
+      this.raceService.getPonies().subscribe((ponies: Poney[]) =>{
+        //get race
+      let race = this.raceService.getRaceById(params.id).subscribe(race =>{
+        this.ponies = this.isRacingPipe.transform(ponies, race.poneyIds);
   
-      this.intervalId = setInterval(() => {
-        for(let i=0;i<this.ponies.length; i++){
-          this.ponies[i].distance += Math.floor(Math.random() * 5) + 1
-          if(this.ponies[i].distance >= 90){
-            clearInterval(this.intervalId);
-            break; 
+        this.intervalId = setInterval(() => {
+          for(let i=0;i<this.ponies.length; i++){
+            this.ponies[i].distance += Math.floor(Math.random() * 5) + 1
+            if(this.ponies[i].distance >= 90){
+              //clearInterval(this.intervalId);
+              this.stopRace();
+              break; 
+            }
           }
-        }
-      },400)
+        },400)
+      });
+      });
+    }
+
+    stopRace(): void{
+      clearInterval(this.intervalId);
+    }
+
+    ngOnDestroy(){
+      this.raceService.reset();
+      this.stopRace();
     }
 }

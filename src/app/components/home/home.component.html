@@ -1,5 +1,5 @@
 <ul>
-  <li *ngFor="let race of races">
+  <li *ngFor="let race of races$ | async">
       <a type="button"
       class="btn btn-secondary"
       [routerLink]="['/race', race.id]">

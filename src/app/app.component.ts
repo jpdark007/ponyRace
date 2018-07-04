@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Ambient Pony Racer !!!';
+  title = 'Ambient-IT Pony Racer !!!';
   
 }

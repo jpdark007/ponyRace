@@ -12,12 +12,15 @@ import { IsRacingPipe } from '../../pipes/is-racing.pipe';
 import { HomeComponent } from '../../components/home/home.component';
 import { RouterModule } from '@angular/router';
 
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   imports: [
     CommonModule,
     NgbModule.forRoot(),
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   exports: [
     PoneyComponent,
