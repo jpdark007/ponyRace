@@ -35,6 +35,10 @@ export class RaceService {
     }));
   }
 
+  setRace(race){
+    return this.http.post("http://localhost:3000/races", race);
+  }
+
   reset(){
     this.ponies.forEach(poney => {
       poney.distance = 0;

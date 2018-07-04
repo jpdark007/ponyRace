@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import {PoneyRaceModule} from './modules/poney-race/poney-race.module';
 import {RouterModule} from '@angular/router'
 
-import rootRouterConfig from './app.routes'
+import rootRouterConfig from './app.routes';
+
 
 @NgModule({
   declarations: [

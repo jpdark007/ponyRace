@@ -14,13 +14,16 @@ import { RouterModule } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
 
-
+import { CreateRaceComponent } from '../../components/create-race/create-race.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   imports: [
     CommonModule,
     NgbModule.forRoot(),
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     PoneyComponent,
@@ -33,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     RaceComponent,
     CapitalizePipe,
     IsRacingPipe,
-    HomeComponent
+    HomeComponent,
+    CreateRaceComponent
   ],
   providers:[
     IsRacingPipe

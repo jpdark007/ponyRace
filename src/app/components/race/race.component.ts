@@ -65,6 +65,9 @@ export class RaceComponent implements OnInit {
 
     stopRace(): void{
       clearInterval(this.intervalId);
+      //this.ponies.forEach(poney => {
+      //  poney.img = poney.img.replace('-running', '');
+      //});
     }
 
     ngOnDestroy(){

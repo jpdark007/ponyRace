@@ -1,0 +1,29 @@
+<h1>Créer course</h1>
+<form [formGroup]="raceFormGroup" (submit)="handleSubmit()">
+  <label>Nom</label>
+  <br />
+  <!--input required (ngModelChange)="name = $event" [ngModel]="name" name="name" type="text" /-->
+  <!--input required [(ngModel)]="name" name="name" type="text" /-->
+  <input formControlName="name" name="name" type="text" />
+  {{
+    raceFormGroup.controls.name.hasError('required') ? 'Champ requis' : ''
+  }}
+  <div *ngIf="raceFormGroup.controls.name.hasError('required')" class="alert alert-danger" role="alert">
+      Ce Champ est requis
+  </div>
+  <div *ngIf="raceFormGroup.controls.name.hasError('length')" class="alert alert-danger" role="alert">
+      Longueur champ
+  </div>
+  <br />
+  <br />
+  <label>Poney(s)</label>
+  <br />
+  <select name="poneyIds" formControlName="poneyIds" multiple>
+        <option [value]="0">Michel</option>
+        <option [value]="1">Tom</option>
+        <option [value]="2">Steeve</option>
+  </select>
+  {{raceFormGroup.value | json}}
+<br />
+  <button [disabled]="raceFormGroup.invalid" type="submit">Creér</button>
+</form>
