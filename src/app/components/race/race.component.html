@@ -1,3 +1,13 @@
-<span *ngFor="let p of ponies; let i = index">
-  <app-poney [class.winner]="p.id === winningPoneyId" appRacing *ngIf="p.name !=='Tom'" [poney]="p" (win)="handlewin($event)" (click)="handleclick(i)"></app-poney>
+<span *ngFor="let p of ponies | isRacing:poneyIds; let i = index">
+  <app-poney
+    [class.winner]="p.id === winningPoneyId"
+    appRacing
+    *ngIf="p.name !=='Tom'"
+    [poney]="p"
+    (win)="handlewin($event)"
+    (click)="handleclick(i)">
+    
+    <span *ngIf="p.id === winningPoneyId">ddddd</span>
+  </app-poney>
+  <hr />
 </span>

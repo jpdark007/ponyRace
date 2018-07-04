@@ -1,4 +1,9 @@
 <div class="poney">
   <img id="poney{{ poney.id }}" [src]="poney.img">
-  <h3>{{ poney.name }} ({{ poney.id }})</h3>
+  <h3>{{ poney.name | uppercase }} ({{ poney.id }})</h3>
+  <p>
+    <ngb-alert [dismissible]="false">
+      <strong>{{ poney.name | capitalize }}</strong> {{ poney.distance }} m
+    </ngb-alert>
+  </p>
 </div>

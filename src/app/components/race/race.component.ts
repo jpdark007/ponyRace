@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IsRacingPipe } from '../../pipes/is-racing.pipe';
 
 @Component({
   selector: 'app-race',
@@ -9,6 +10,8 @@ export class RaceComponent implements OnInit {
 
   winningPoneyId: number;
   intervalId: any;
+
+  poneyIds: number[] = [0,3];
 
   ponies: Poney[] =
   [
@@ -29,25 +32,36 @@ export class RaceComponent implements OnInit {
       "name": "Steeve",
       "img": "https://github.com/Aubret/poneymon/blob/master/src/assets/pony-green-running.gif?raw=true",
       "distance": 0
+    },
+    {
+      id: 3,
+      "name": "Robert",
+      "img": "https://github.com/Aubret/poneymon/blob/master/src/assets/pony-purple-running.gif?raw=true",
+      "distance": 0
     }
   ];
 
   handlewin(poney: Poney): void{
     //document.getElementById('poney'+ poney.id).classList.remove('poney'+poney.id);
-    this.winningPoneyId = poney.id;
+    if (typeof this.winningPoneyId === "undefined"){
+      this.winningPoneyId = poney.id;
+    }
     console.log("handlewin")
   }
 
   handleclick(i){
     //document.getElementById('poney'+i).src = 
-    let img = (<HTMLImageElement>document.getElementById('poney'+i));
-    img.src = img.src.replace("running", "rainbow");
+    //let img = (<HTMLImageElement>document.getElementById('poney'+i));
+    //img.src = img.src.replace("running", "rainbow");
     console.log("handleclick")
   }
 
-  constructor() { }
+  constructor(private isRacingPipe: IsRacingPipe) { }
 
   ngOnInit() {
+
+    this.ponies = this.isRacingPipe.transform(this.ponies, this.poneyIds);
+
     this.intervalId = setInterval(() => {
       for(let i=0;i<this.ponies.length; i++){
         this.ponies[i].distance += Math.floor(Math.random() * 5) + 1
