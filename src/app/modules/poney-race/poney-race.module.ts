@@ -9,10 +9,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CapitalizePipe } from '../../pipes/capitalize.pipe'
 import { IsRacingPipe } from '../../pipes/is-racing.pipe';
 
+import { HomeComponent } from '../../components/home/home.component';
+import { RouterModule } from '@angular/router';
+
+
 @NgModule({
   imports: [
     CommonModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    RouterModule
   ],
   exports: [
     PoneyComponent,
@@ -24,7 +29,8 @@ import { IsRacingPipe } from '../../pipes/is-racing.pipe';
     RacingDirective,
     RaceComponent,
     CapitalizePipe,
-    IsRacingPipe
+    IsRacingPipe,
+    HomeComponent
   ],
   providers:[
     IsRacingPipe

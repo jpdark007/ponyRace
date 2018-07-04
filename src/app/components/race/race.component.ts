@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IsRacingPipe } from '../../pipes/is-racing.pipe';
+import { RaceService } from '../../services/race.service';
 
 @Component({
   selector: 'app-race',
@@ -13,33 +14,7 @@ export class RaceComponent implements OnInit {
 
   poneyIds: number[] = [0,3];
 
-  ponies: Poney[] =
-  [
-    {
-      id: 0,
-      "name": "Eric",
-      "img" : "https://github.com/Aubret/poneymon/blob/master/src/assets/pony-blue-running.gif?raw=true",
-      "distance": 0
-    },
-    {
-      id: 1,
-      "name": "Tom",
-      "img": "https://github.com/Aubret/poneymon/blob/master/src/assets/pony-purple-running.gif?raw=true",
-      "distance": 0
-    },
-    {
-      id: 2,
-      "name": "Steeve",
-      "img": "https://github.com/Aubret/poneymon/blob/master/src/assets/pony-green-running.gif?raw=true",
-      "distance": 0
-    },
-    {
-      id: 3,
-      "name": "Robert",
-      "img": "https://github.com/Aubret/poneymon/blob/master/src/assets/pony-purple-running.gif?raw=true",
-      "distance": 0
-    }
-  ];
+  ponies: Poney[]
 
   handlewin(poney: Poney): void{
     //document.getElementById('poney'+ poney.id).classList.remove('poney'+poney.id);
@@ -56,9 +31,14 @@ export class RaceComponent implements OnInit {
     console.log("handleclick")
   }
 
-  constructor(private isRacingPipe: IsRacingPipe) { }
+  constructor(
+    private isRacingPipe: IsRacingPipe,
+    private raceService: RaceService
+  ) { }
 
   ngOnInit() {
+
+    this.ponies = this.raceService.getPonies();
 
     this.ponies = this.isRacingPipe.transform(this.ponies, this.poneyIds);
 
